@@ -6,79 +6,54 @@ class Topping(models.Model):
     def __str__(self):
         return self.name
 
+class Crust(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+class Size(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+class Sauce(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+class Cheese(models.Model):
+    name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
+
+
 class Pizza(models.Model):
-   id = models.AutoField(primary_key=True)
    toppings = models.ManyToManyField(Topping, blank=True)
-   
-   # Crust
-   Normal = 'Normal'
-   Thin = 'Thin'
-   Thick = 'Thick'
-   
-   Crust_Choices = [
-        (Normal, 'Normal'),
-        (Thin, 'Thin'),
-        (Thick, 'Thick'),
-    ]
-
-   crust = models.CharField(
-        max_length=15,
-        choices=Crust_Choices,
-        default=None,
-    )
-
-   # Size
-   Small = 'Small'
-   Medium = 'Medium'
-   Large = 'Large'
-   
-   Size_Choices = [
-        (Small, 'Small'),
-        (Medium, 'Medium'),
-        (Large, 'Large'),
-    ]
-
-   size = models.CharField(
-        max_length=15,
-        choices=Size_Choices,
-        default=None,
-    )
-    
-   #Sauce
-   Tomato = 'Tomato'
-   Barb = 'BBQ'
-   Chilli = 'Chilli'
-   
-   Sauce_Choices = [
-        (Tomato, 'Tomato'),
-        (Barb, 'BBQ'),
-        (Chilli, 'Chilli'),
-    ]
-
-   sauce = models.CharField(
-        max_length=15,
-        choices=Sauce_Choices,
-        default=None,
-    )
-
-   # Cheese
-   Mozzarella = 'Mozzarella'
-   Cheddar = 'Cheddar'
-   Gorgonzola = 'Gorgonzola'
-   Provolone = 'Provolone'
-   
-   Cheese_Choices = [
-        (Mozzarella, 'Mozzarella'),
-        (Cheddar, 'Cheddar'),
-        (Gorgonzola, 'Gorgonzola'),
-        (Provolone, 'Provolone'),
-    ]
-
-   cheese = models.CharField(
-        max_length=15,
-        choices=Cheese_Choices,
-        default=None,
-    )
+   crust = models.ForeignKey(Crust, on_delete=models.CASCADE, default='Regular')
+   size = models.ForeignKey(Size, on_delete=models.CASCADE, default='Medium')
+   sauce = models.ForeignKey(Sauce, on_delete=models.CASCADE, default='Tomato')
+   cheese = models.ForeignKey(Cheese, on_delete=models.CASCADE, default='Mozzarella')
 
    def __str__(self):
-       return f'Pizza with {self.crust} crust, {self.sauce} sauce, and {self.cheese} cheese. Toppings: {", ".join([topping.name for topping in self.toppings.all()])}'
+       return f'Toppings: {", ".join([topping.name for topping in self.toppings.all()])}'
+
+class Customer(models.Model):
+   name = models.CharField(max_length=25)
+   
+   def __str__(self):
+      return f'{self.name}'
+
+class Order(models.Model):
+   paid = models.BooleanField()
+   customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+   pizza = models.ForeignKey(Pizza, on_delete=models.CASCADE)
+
+   def __str__(self):
+      if self.paid:
+        return f'{self.pizza} // Ordered by {self.customer} // Paid'
+      else:
+        return f'{self.pizza} // Ordered by {self.customer} // Not Paid'
