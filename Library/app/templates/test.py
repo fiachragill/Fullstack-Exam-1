@@ -10,6 +10,17 @@
 
 n = 9
 nums = [n for n in range(1, n+1)]
+i = 1
+edge = 2 
 
 for n in nums[::-1]:
-    print(n)
+    if i == 1:
+        print(n)
+    elif i == 2:
+        print((str(n))*(edge))
+    else:
+        print((str(n))*(edge+1))
+
+    edge += 1
+    i += 1
+    
