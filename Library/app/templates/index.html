@@ -1,8 +1,11 @@
 {% extends 'base.html'%}
 {% block title %}
-        Home :)
+    Home :)
 {% endblock %}
 {% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <br>
+    <div class="button-container">
+        <button class="big-button" onclick="window.location.href='create/'">Create Pizza</button>
+    </div>
 {% endblock %}
+

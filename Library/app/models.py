@@ -41,14 +41,9 @@ class Pizza(models.Model):
    def __str__(self):
        return f'Toppings: {", ".join([topping.name for topping in self.toppings.all()])}'
 
-class CustomerDetails(models.Model):
-    email = models.EmailField()
-    card_number = models.CharField(max_length=16)
-    ccv = models.CharField(max_length=3)
 
 class Customer(models.Model):
    name = models.CharField(max_length=25)
-   details = models.ForeignKey(CustomerDetails, on_delete=models.CASCADE)
    
    def __str__(self):
       return f'{self.name}'
