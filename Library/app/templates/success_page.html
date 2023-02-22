@@ -1,12 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    Scucessssswsssssswssssss
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    Success Page
+{% endblock %}
+
+{% block content %}
+<br>
+    <!-- Jumbotron element from Bootstrap for a large banner with text -->
+    <div class="jumbotron">
+        <h1 class="display-4">Success!</h1>
+        <p class="lead">Thank you for ordering {{order.customer}}</p>
+        <hr class="my-4">
+        <p>{{order.pizza}}</p>
+
+        <!-- Check if the pizza has any toppings and display them as a list -->
+        {% if order.pizza.toppings.all %}
+            <p>Toppings: {{ order.pizza.toppings.all|join:', ' }}</p>
+        {% endif %}
+
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="/" role="button">Return Home</a>
+        </p>
+    </div>
+{% endblock %}
+

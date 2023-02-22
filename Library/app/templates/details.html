@@ -2,29 +2,33 @@
 {% block title %}
         Details :)
 {% endblock %}
+
 {% block content %}
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<br>
-  <div class="card-container">
-    <div class="card bg-white mb-3">
-      <div class="card-header"> <h4>Your Order</h4></div>
-      <div class="card-body">
-        <h5 class="card-title"></h5>
-        <p class="card-text"></p>
-        <ul>
-            <li>Size: {{ pizza.size }}</l>
-            <li>Crust: {{ pizza.crust }}</li>
-            <li>Cheese: {{ pizza.cheese }}</li>
-            <li>Sauce: {{ pizza.sauce }}</li>
-            <li>{{ pizza }}</li>
-        </ul>
+    
+    <!-- Bootstrap card component to display order details -->
+    <div class="card-container">
+      <div class="card bg-white mb-3">
+        <div class="card-header">
+            <h4>Your Order</h4>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+          <ul>
+              <li>Size: {{ pizza.size }}</l>
+              <li>Crust: {{ pizza.crust }}</li>
+              <li>Cheese: {{ pizza.cheese }}</li>
+              <li>Sauce: {{ pizza.sauce }}</li>
+              <li>{{ pizza }}</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-  </form>
+
+    <!-- Form to update customer information and submit order -->
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Submit</button>
+    </form>
 {% endblock %}

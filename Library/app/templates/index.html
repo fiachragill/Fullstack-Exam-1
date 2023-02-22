@@ -4,8 +4,15 @@
 {% endblock %}
 {% block content %}
     <br>
-    <div class="button-container">
-        <button class="big-button" onclick="window.location.href='create/'">Create Pizza</button>
+    <!-- Jumbotron element from Bootstrap for a large banner with text -->
+    <div class="jumbotron">
+        <h1 class="display-4">Welcome!</h1>
+        <p class="lead">This is the best pizza place in the world.</p>
+        <hr class="my-4">
+        <p>This is the best pizza place in the world because our pizzas are handmade with fresh, locally-sourced ingredients and cooked in a traditional wood-fired oven, resulting in a perfect crispy crust and delicious toppings that melt in your mouth. Our secret blend of spices and sauces is what sets us apart and keeps our customers coming back for more.</p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="create/" role="button">Create Pizza Now</a> <!-- Large primary button -->
+        </p>
     </div>
 {% endblock %}
 
